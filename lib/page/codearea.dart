@@ -1,7 +1,26 @@
 import 'package:flutter/material.dart';
 
-class CodeArea extends StatelessWidget {
+class CodeArea extends StatefulWidget {
   const CodeArea({super.key});
+
+  @override
+  CodeAreaState createState() => CodeAreaState();
+}
+
+class CodeAreaState extends State<CodeArea> {
+  int counter = 0;
+
+  void increaseCounter() {
+    setState(() {
+      counter++;
+    });
+  }
+
+  void decreaseCounter() {
+    setState(() {
+      counter--;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,21 +31,30 @@ class CodeArea extends StatelessWidget {
           width: double.infinity,
           color: Colors.blue,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text(
-                "0",
-                style: TextStyle(
+              Text(
+                '$counter',
+                style: const TextStyle(
                     fontSize: 30,
                     color: Colors.red,
                     fontWeight: FontWeight.w900),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: decreaseCounter,
+                icon: const Icon(Icons.remove),
+              ),
+              ElevatedButton(
+                onPressed: decreaseCounter,
+                child: const Text("Decrease"),
+              ),
+              IconButton(
+                onPressed: increaseCounter,
                 icon: const Icon(Icons.add),
               ),
               ElevatedButton(
-                onPressed: () {},
-                child: const Text("Decrease"),
+                onPressed: increaseCounter,
+                child: const Text("Increase"),
               ),
             ],
           ),
